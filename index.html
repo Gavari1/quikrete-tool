@@ -144,9 +144,9 @@
       position: relative;
     }
 
-    /* Professional, subtle tier accents */
+    /* Tier accents (swapped per your request) */
     .card--good {
-      border-top: 3px solid #16a34a; /* green */
+      border-top: 3px solid #ea580c; /* orange */
     }
 
     .card--better {
@@ -154,7 +154,23 @@
     }
 
     .card--best {
-      border-top: 3px solid #ea580c; /* orange */
+      border-top: 3px solid #16a34a; /* green */
+    }
+
+    /* Make BEST stand out */
+    .card--best {
+      border: 2px solid #16a34a;
+      background: #f0fdf4; /* subtle green tint */
+      box-shadow: 0 18px 45px rgba(22, 163, 74, 0.22);
+    }
+
+    /* 20% larger ONLY on desktop so mobile doesn't get weird */
+    @media (min-width: 768px) {
+      .card--best {
+        transform: scale(1.2);
+        transform-origin: center;
+        z-index: 5;
+      }
     }
 
     .card-pill {
@@ -171,10 +187,22 @@
       align-self: flex-start;
     }
 
+    /* Optional: make BEST pill feel special */
+    .card--best .card-pill {
+      background: #166534; /* deeper green */
+    }
+
     .card-title {
       font-size: 0.98rem;
       font-weight: 600;
       color: #111827;
+    }
+
+    /* Different font + slightly bigger title for BEST */
+    .card--best .card-title {
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-size: 1.08rem;
+      letter-spacing: 0.01em;
     }
 
     .card-code {
@@ -660,10 +688,7 @@
 
       // Floor Leveling up to 1"
       "leveler|1": {
-        good: {
-          label: "Good",
-          name: "N/A"
-        },
+        good: { label: "Good", name: "N/A" },
         better: {
           label: "Better",
           name: "QUIKRETE® Re-Cap",
@@ -678,8 +703,7 @@
         }
       },
 
-      
-          // Concrete Installation up to 2"
+      // Concrete Installation up to 2"
       "concrete|2": {
         good: {
           label: "Good",
@@ -701,7 +725,7 @@
         }
       },
 
-         // Concrete Installation over 2"
+      // Concrete Installation over 2"
       "concrete|over2": {
         good: {
           label: "Good",
@@ -721,7 +745,7 @@
           code: "#1004",
           notes: '6500 PSI concrete that is air entrained and also contains a corrosion inhibitor and is a pre-blended mixture of sand, cement and gravel.'
         }
-      },
+      }
     };
 
     // ------------------------------
