@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>QUIKRETE Project Selector</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
@@ -135,12 +136,10 @@
       position: relative;
     }
 
-    /* Tier accents (swapped per your request) */
     .card--good { border-top: 3px solid #ea580c; }   /* orange */
     .card--better { border-top: 3px solid #2563eb; } /* blue */
     .card--best { border-top: 3px solid #16a34a; }   /* green */
 
-    /* Make BEST stand out */
     .card--best {
       border: 2px solid #16a34a;
       background: #f0fdf4;
@@ -270,7 +269,7 @@
 
   <script>
     // ------------------------------
-    // 1. Data
+    // 1. Data (base, specific combos)
     // ------------------------------
     const recommendations = {
       // Mortar joint repair
@@ -303,8 +302,6 @@
 
       "mortar-joint|1": { message: "<strong>Mortar joint repair • Up to 1\"</strong><br/>For further assistance please call 1-800-282-5828." },
       "mortar-joint|2": { message: "<strong>Mortar joint repair • Up to 2\"</strong><br/>For further assistance please call 1-800-282-5828." },
-
-      // FIXED KEY: must be "over2" to match dropdown value
       "mortar-joint|over2": { message: "<strong>Mortar joint repair • Over 2\"</strong><br/>For further assistance please call 1-800-282-5828." },
 
       // Crack repair
@@ -442,6 +439,7 @@
       }));
     }
 
+    // Shared concrete-style combo
     const COMBO_CONCRETE_1101_5000_QMAX = {
       good: {
         label: "Good",
@@ -463,9 +461,28 @@
       }
     };
 
-    // Apply same combo to Concrete / Brick / CMU for these sizes
-    applyCombo(["concrete", "brick", "CMU"], ["0.25", "0.375", "0.5"], COMBO_CONCRETE_1101_5000_QMAX);
-    applyCombo(["concrete", "brick", "CMU"], ["2", "over2"], COMBO_CONCRETE_1101_5000_QMAX);
+    // Apply shared combo to concrete + brick (NOT CMU here)
+    applyCombo(["concrete", "brick"], ["0.25", "0.375", "0.5"], COMBO_CONCRETE_1101_5000_QMAX);
+    applyCombo(["concrete", "brick"], ["2", "over2"], COMBO_CONCRETE_1101_5000_QMAX);
+
+    // CMU install combo (NO GOOD)
+    const COMBO_CMU_MORTAR_1102_MASON_1136 = {
+      better: {
+        label: "Better",
+        name: "QUIKRETE® Mortar Mix",
+        code: "#1102",
+        notes: ""
+      },
+      best: {
+        label: "Best",
+        name: "QUIKRETE® Mason Mix Type S",
+        code: "#1136",
+        notes: ""
+      }
+    };
+
+    // Apply CMU combo to the sizes you listed
+    applyCombo(["CMU"], ["0.25", "0.375", "0.5", "1"], COMBO_CMU_MORTAR_1102_MASON_1136);
 
     // ------------------------------
     // 2. DOM references
