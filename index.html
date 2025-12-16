@@ -498,7 +498,6 @@ applyCallForAssistance(["leveler"], ["over2"]);
     };
 
     // Apply shared combo to concrete + brick (NOT CMU here)
-    applyCombo(["concrete", "brick"], ["0.25", "0.375", "0.5"], COMBO_CONCRETE_1101_5000_QMAX);
     applyCombo(["concrete"], ["2", "over2"], COMBO_CONCRETE_1101_5000_QMAX);
 
     // CMU install combo (NO GOOD)
@@ -517,8 +516,8 @@ applyCallForAssistance(["leveler"], ["over2"]);
       }
     };
 
-    // Apply CMU combo to the sizes you listed
-    applyCombo(["CMU"], ["0.25", "0.375", "0.5", "1"], COMBO_CMU_MORTAR_1102_MASON_1136);
+    // Apply CMU combo to the sizes you listed + brick
+    applyCombo(["CMU", "brick"], ["0.25", "0.375", "0.5", "1"], COMBO_CMU_MORTAR_1102_MASON_1136);
 
     // ------------------------------
     // 2. DOM references
