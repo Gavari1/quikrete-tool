@@ -176,6 +176,27 @@
       -webkit-backdrop-filter: blur(6px);
     }
 
+    /* ✅ NEW: datasheet link in top-right of card */
+    .datasheet-link {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--q-yellow);
+      text-decoration: none;
+      opacity: 0.9;
+      z-index: 2;
+    }
+    .datasheet-link:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+    /* Make it readable on the light BEST card */
+    .card--best .datasheet-link {
+      color: #166534;
+    }
+
     /* GOOD */
     .card--good {
       border: 2px solid #ea580c; /* orange */
@@ -547,8 +568,13 @@
         notes: "4000 PSI concrete mix suitable for interior and exterior applications that is a pre-blended mixture of sand, cement and gravel." },
       better: { label: "Better", name: "QUIKRETE® 5000", code: "#1007",
         notes: "5000 PSI high early strength gain concrete mix that is a pre-blended mixture of sand, cement and gravel." },
-      best: { label: "Best", name: "QUIKRETE® Q Max Pro", code: "#1004",
-        notes: "6500 PSI concrete that is air entrained and also contains a corrosion inhibitor and is a pre-blended mixture of sand, cement and gravel." }
+      best: {
+        label: "Best",
+        name: "QUIKRETE® Q Max Pro",
+        code: "#1004",
+        notes: "6500 PSI concrete that is air entrained and also contains a corrosion inhibitor and is a pre-blended mixture of sand, cement and gravel.",
+        datasheet: "https://www.quikrete.com/pdfs/data_sheet-qmax-pro-1004-81.pdf"
+      }
     };
 
     applyCombo(["concrete"], ["2", "over2"], COMBO_CONCRETE_1101_5000_QMAX);
@@ -635,6 +661,17 @@
         const pill = document.createElement("div");
         pill.className = "card-pill";
         pill.textContent = data.label;
+
+        // ✅ NEW: Data Sheet link (only shows if datasheet URL exists)
+        if (data.datasheet) {
+          const link = document.createElement("a");
+          link.className = "datasheet-link";
+          link.href = data.datasheet;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "Data Sheet";
+          card.appendChild(link);
+        }
 
         const title = document.createElement("div");
         title.className = "card-title";
