@@ -564,18 +564,28 @@
     }
 
     const COMBO_CONCRETE_1101_5000_QMAX = {
-      good: { label: "Good", name: "QUIKRETE® High Strength Concrete Mix", code: "1101",
-        notes: "4000 PSI concrete mix suitable for interior and exterior applications that is a pre-blended mixture of sand, cement and gravel." },
-      better: { label: "Better", name: "QUIKRETE® 5000", code: "#1007",
-        notes: "5000 PSI high early strength gain concrete mix that is a pre-blended mixture of sand, cement and gravel." },
-      best: {
-        label: "Best",
-        name: "QUIKRETE® Q Max Pro",
-        code: "#1004",
-        notes: "6500 PSI concrete that is air entrained and also contains a corrosion inhibitor and is a pre-blended mixture of sand, cement and gravel.",
-        datasheet: "https://www.quikrete.com/pdfs/data_sheet-qmax-pro-1004-81.pdf"
-      }
-    };
+  good: {
+    label: "Good",
+    name: "QUIKRETE® High Strength Concrete Mix",
+    code: "#1101",
+    notes: "4000 PSI concrete mix suitable for interior and exterior applications that is a pre-blended mixture of sand, cement and gravel.",
+    datasheet: "https://www.quikrete.com/pdfs/data_sheet-concrete%20mix%201101.pdf"
+  },
+  better: {
+    label: "Better",
+    name: "QUIKRETE® 5000",
+    code: "#1007",
+    notes: "5000 PSI high early strength gain concrete mix that is a pre-blended mixture of sand, cement and gravel.",
+    datasheet: "https://www.quikrete.com/pdfs/data_sheet-quikrete%205000%201007.pdf"
+  },
+  best: {
+    label: "Best",
+    name: "QUIKRETE® Q Max Pro",
+    code: "#1004",
+    notes: "6500 PSI concrete that is air entrained and also contains a corrosion inhibitor and is a pre-blended mixture of sand, cement and gravel.",
+    datasheet: "https://www.quikrete.com/pdfs/data_sheet-qmax-pro-1004-81.pdf"
+  }
+};
 
     applyCombo(["concrete"], ["2", "over2"], COMBO_CONCRETE_1101_5000_QMAX);
 
