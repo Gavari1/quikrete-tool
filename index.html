@@ -176,24 +176,34 @@
       -webkit-backdrop-filter: blur(6px);
     }
 
-    /* ✅ NEW: datasheet link in top-right of card */
-    .datasheet-link {
+    /* ✅ UPDATED: “Technical Data Sheet” + “Safety Data Sheet” links (top-right, stacked) */
+    .datasheet-links {
       position: absolute;
       top: 12px;
       right: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      z-index: 2;
+      text-align: right;
+    }
+
+    .datasheet-links a {
       font-size: 0.8rem;
       font-weight: 600;
       color: var(--q-yellow);
       text-decoration: none;
       opacity: 0.9;
-      z-index: 2;
+      white-space: nowrap;
     }
-    .datasheet-link:hover {
+
+    .datasheet-links a:hover {
       text-decoration: underline;
       opacity: 1;
     }
+
     /* Make it readable on the light BEST card */
-    .card--best .datasheet-link {
+    .card--best .datasheet-links a {
       color: #166534;
     }
 
@@ -427,7 +437,7 @@
         good: { label: "Good", name: "QUIKRETE® Concrete Crack Seal", code: "#8640",
           notes: "Flowable crack sealer for hairline to small cracks in concrete slabs." },
         better: { label: "Better", name: "QUIKRETE® Advanced Polymer Concrete Crack Sealant", code: "#8660",
-          notes: "Flexible, long-lasting sealant for active or moving cracks up to 1/2\"." },
+          notesnotes: "Flexible, long-lasting sealant for active or moving cracks up to 1/2\"." },
         best: { label: "Best", name: "QUIKRETE® Epoxy Concrete Repair", code: "Epoxy",
           notes: "Two-component epoxy for maximum bond and chemical resistance in narrow cracks." }
       },
@@ -563,29 +573,31 @@
       }));
     }
 
+    // ✅ UPDATED: Q Max Pro now includes BOTH links (datasheet + sds)
     const COMBO_CONCRETE_1101_5000_QMAX = {
-  good: {
-    label: "Good",
-    name: "QUIKRETE® High Strength Concrete Mix",
-    code: "#1101",
-    notes: "4000 PSI concrete mix suitable for interior and exterior applications that is a pre-blended mixture of sand, cement and gravel.",
-    datasheet: "https://www.quikrete.com/pdfs/data_sheet-concrete%20mix%201101.pdf"
-  },
-  better: {
-    label: "Better",
-    name: "QUIKRETE® 5000",
-    code: "#1007",
-    notes: "5000 PSI high early strength gain concrete mix that is a pre-blended mixture of sand, cement and gravel.",
-    datasheet: "https://www.quikrete.com/pdfs/data_sheet-quikrete%205000%201007.pdf"
-  },
-  best: {
-    label: "Best",
-    name: "QUIKRETE® Q Max Pro",
-    code: "#1004",
-    notes: "6500 PSI concrete that is air entrained and also contains a corrosion inhibitor and is a pre-blended mixture of sand, cement and gravel.",
-    datasheet: "https://www.quikrete.com/pdfs/data_sheet-qmax-pro-1004-81.pdf"
-  }
-};
+      good: {
+        label: "Good",
+        name: "QUIKRETE® High Strength Concrete Mix",
+        code: "#1101",
+        notes: "4000 PSI concrete mix suitable for interior and exterior applications that is a pre-blended mixture of sand, cement and gravel.",
+        datasheet: "https://www.quikrete.com/pdfs/data_sheet-concrete%20mix%201101.pdf"
+      },
+      better: {
+        label: "Better",
+        name: "QUIKRETE® 5000",
+        code: "#1007",
+        notes: "5000 PSI high early strength gain concrete mix that is a pre-blended mixture of sand, cement and gravel.",
+        datasheet: "https://www.quikrete.com/pdfs/data_sheet-quikrete%205000%201007.pdf"
+      },
+      best: {
+        label: "Best",
+        name: "QUIKRETE® Q Max Pro",
+        code: "#1004",
+        notes: "6500 PSI concrete that is air entrained and also contains a corrosion inhibitor and is a pre-blended mixture of sand, cement and gravel.",
+        datasheet: "https://www.quikrete.com/pdfs/data_sheet-qmax-pro-1004-81.pdf",
+        sds: "https://www.quikrete.com/pdfs/sds-c6-fast-setting-products.pdf"
+      }
+    };
 
     applyCombo(["concrete"], ["2", "over2"], COMBO_CONCRETE_1101_5000_QMAX);
 
@@ -672,15 +684,30 @@
         pill.className = "card-pill";
         pill.textContent = data.label;
 
-        // ✅ NEW: Data Sheet link (only shows if datasheet URL exists)
-        if (data.datasheet) {
-          const link = document.createElement("a");
-          link.className = "datasheet-link";
-          link.href = data.datasheet;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = "Data Sheet";
-          card.appendChild(link);
+        // ✅ UPDATED: show stacked “Technical Data Sheet” + “Safety Data Sheet” (if provided)
+        if (data.datasheet || data.sds) {
+          const linksWrap = document.createElement("div");
+          linksWrap.className = "datasheet-links";
+
+          if (data.datasheet) {
+            const tech = document.createElement("a");
+            tech.href = data.datasheet;
+            tech.target = "_blank";
+            tech.rel = "noopener noreferrer";
+            tech.textContent = "Technical Data Sheet";
+            linksWrap.appendChild(tech);
+          }
+
+          if (data.sds) {
+            const sds = document.createElement("a");
+            sds.href = data.sds;
+            sds.target = "_blank";
+            sds.rel = "noopener noreferrer";
+            sds.textContent = "Safety Data Sheet";
+            linksWrap.appendChild(sds);
+          }
+
+          card.appendChild(linksWrap);
         }
 
         const title = document.createElement("div");
